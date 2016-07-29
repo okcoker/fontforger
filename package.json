@@ -1,0 +1,49 @@
+{
+  "name": "fontforger",
+  "version": "0.0.1",
+  "description": "Convert fonts using fontforge",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint --ext .js .",
+    "lint": "npm run eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okcoker/fontforger.git"
+  },
+  "bin": {
+    "fontforger": "cli.js"
+  },
+  "keywords": [
+    "fontforge",
+    "convert",
+    "fonts",
+    "ttf",
+    "eot",
+    "otf",
+    "woff",
+    "woff2",
+    "svg",
+    "font-face"
+  ],
+  "author": "Sean Coker <hello@sean.is>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okcoker/fontforger/issues"
+  },
+  "homepage": "https://github.com/okcoker/fontforger#readme",
+  "dependencies": {
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "debug": "2.2.0",
+    "glob": "7.0.5",
+    "mkdirp": "0.5.1",
+    "promise": "7.1.1",
+    "rimraf": "2.5.4"
+  },
+  "devDependencies": {
+    "eslint": "3.1.1",
+    "eslint-plugin-promise": "2.0.0"
+  }
+}

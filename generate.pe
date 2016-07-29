@@ -1,0 +1,17 @@
+inputPath = $1;
+outputName = $2:r;
+outputPath = $3;
+extension = $4;
+output = outputPath + "/" + outputName + "." + extension;
+
+Open($1);
+Print('');
+Print('"inputPath": ' + inputPath);
+Print('"outputName": ' + outputName);
+Print('"outputPath": ' + outputPath);
+Print('"extension": ' + extension);
+Print('"output": ' + output);
+Print('');
+
+Generate(output);
+Quit(0);
