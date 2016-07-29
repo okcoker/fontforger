@@ -1,6 +1,6 @@
 {
   "name": "fontforger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert fonts using fontforge",
   "main": "index.js",
   "scripts": {
