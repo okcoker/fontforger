@@ -1,11 +1,24 @@
 var exec = require('child_process').exec;
 var colors = require('colors');
+var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
 var debug = require('debug')('fontforger');
 var Promise = require('promise');
 
+function fileExists(file) {
+    return new Promise(function(resolve) {
+        fs.access(file, fs.F_OK, function(err) {
+            if (err) {
+                resolve(false);
+                return;
+            }
+
+            resolve(true);
+        });
+    });
+}
 function mkdir(pathname) {
     return new Promise(function(resolve, reject) {
         mkdirp(pathname, function(err) {
@@ -35,7 +48,8 @@ function cleanDir(dir) {
 
 function convertFont(fontPath, outputPath, extension) {
     return new Promise(function(resolve, reject) {
-        var outputName = path.basename(fontPath);
+        var outputName = path.basename(fontPath).split('.')[0];
+        var outputFile = outputPath + '/' + outputName + '.' + extension;
         var command = [
             'fontforge',
             '-script "' + path.resolve('./generate.pe') + '"',
@@ -45,17 +59,26 @@ function convertFont(fontPath, outputPath, extension) {
             extension
         ].join(' ');
 
-        debug('Running command: ' + command);
-
-        exec(command, function(error, stdout) {
-            debug(stdout);
-            if (error) {
-                reject('Could not convert font: ' + fontPath + ' to ' + extension);
+        fileExists(outputFile).then(function(exists) {
+            if (exists) {
+                debug(outputFile + ' already exists. Skipping…');
+                resolve();
                 return;
             }
 
-            resolve();
-        });
+            debug('Running command: ' + command);
+
+            exec(command, function(error, stdout) {
+                debug(stdout);
+                if (error) {
+                    reject('Could not convert font: ' + fontPath + ' to ' + extension);
+                    return;
+                }
+
+                resolve();
+            });
+            return;
+        }).catch(reject);
     });
 }
 

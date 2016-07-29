@@ -1,5 +1,5 @@
 inputPath = $1;
-outputName = $2:r;
+outputName = $2;
 outputPath = $3;
 extension = $4;
 output = outputPath + "/" + outputName + "." + extension;
