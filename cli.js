@@ -55,7 +55,16 @@ if (!inputPath) {
 }
 
 var outputPath = program.output || inputPath;
-var files = glob.sync(inputPath);
+// Ignore incorrectly collected file paths when
+// your input path ends with an * like the last
+// example under the cli usage
+var files = glob.sync(inputPath).filter(function(file) {
+    return file[file.length - 1] !== '*';
+});
+
+if (outputPath[outputPath.length - 1] === '*') {
+    outputPath = path.dirname(outputPath);
+}
 
 if (!files.length) {
     console.log(colors.yellow('No files found in', inputPath));
