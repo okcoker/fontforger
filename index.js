@@ -52,7 +52,7 @@ function convertFont(fontPath, outputPath, extension) {
         var outputFile = outputPath + '/' + outputName + '.' + extension;
         var command = [
             'fontforge',
-            '-script "' + path.resolve('./generate.pe') + '"',
+            '-script "' + path.resolve(__dirname, './generate.pe') + '"',
             fontPath,
             outputName,
             outputPath,
