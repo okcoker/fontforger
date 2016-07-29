@@ -60,6 +60,8 @@ var outputPath = program.output || inputPath;
 // example under the cli usage
 var files = glob.sync(inputPath).filter(function(file) {
     return file[file.length - 1] !== '*';
+}).filter(function(file) {
+    return fs.statSync(file).isFile();
 });
 
 if (outputPath[outputPath.length - 1] === '*') {
